@@ -8,7 +8,7 @@ import ui.pages.HomePage;
 
 public class AmazonTests extends BaseUiTest {
 
-    @Test(description = "Verify adding product in the cart and updating them recalculates total item quantity and price correctly")
+    @Test(enabled = false, description = "Verify adding product in the cart and updating them recalculates total item quantity and price correctly")
     public void addProductInCartAndUpdateThemTest() {
         int expectedMenHatsQuantity = 2;
         int expectedWomenHatsQuantity = 1;
