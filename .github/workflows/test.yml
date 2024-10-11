@@ -12,6 +12,6 @@ jobs:
           distribution: 'oracle'
           java-version: '17'
       - name: Build Maven project
-        run: mvn -B package --file pom.xml
+        run: mvn -B package --file pom.xml -DskipTests
       - name: Run tests
         run: mvn test
