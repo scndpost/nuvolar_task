@@ -28,5 +28,5 @@ jobs:
       - name: Build Maven project
         run: mvn -B package --file pom.xml -DskipTests
       - name: Deploy project
-        uses: echo "Deploying..."
+        run: echo "Deploying..."
 
