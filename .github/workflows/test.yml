@@ -1,7 +1,7 @@
 name: Test Project
 on: push
 jobs:
-  Testing:
+  test:
     runs-on: ubuntu-latest
     steps:
       - name: Get code
@@ -15,7 +15,8 @@ jobs:
         run: mvn dependency:resolve
       - name: Run tests
         run: mvn test
-  Deployment:
+  deployment:
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Get code
