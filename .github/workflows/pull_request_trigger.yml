@@ -1,0 +1,12 @@
+name: PR opening actions
+on:
+  pull_request:
+    type:
+      - opened
+  workflow_dispatcher:
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deployment
+        run: echo "Deployment..."
