@@ -16,14 +16,10 @@ jobs:
         run: mvn -B package --file pom.xml -DskipTests
       - name: Deploy project
         run: echo "Deploying..."
-      - name: Check current directory
-        run: pwd
-      - name: List files in current directory
-        run: ls -la
       - name: Upload artifactory
         uses: actions/upload-artifact@v4
         with:
           name: environment-config
-          path: .env
+          path: pom.xml
 
 
