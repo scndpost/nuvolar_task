@@ -30,4 +30,10 @@ jobs:
         run: mvn -B package --file pom.xml -DskipTests
       - name: Deploy project
         run: echo "Deploying..."
+      - name: Upload artifactory
+        uses: actions/upload-artifact@v4
+        with:
+          name: environment-config
+          path: .env
+
 

@@ -1,9 +1,14 @@
 name: PR opening actions
 on:
   pull_request:
-    type:
+    types:
       - opened
   workflow_dispatch:
+  push:
+    branches:
+      - develop
+    paths-ignore:
+      - '.github/workflows/*'
 jobs:
   deploy:
     runs-on: ubuntu-latest
