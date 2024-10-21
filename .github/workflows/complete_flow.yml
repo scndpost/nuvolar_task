@@ -19,7 +19,7 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     outputs:
-      enum-file: ${{ steps.publish.output.enum-file-name }}
+      enum-file: ${{ steps.publish.outputs.enum-file-name }}
     steps:
       - name: Get code
         uses: actions/checkout@v4
