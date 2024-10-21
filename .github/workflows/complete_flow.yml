@@ -28,11 +28,13 @@ jobs:
           java-version: '17'
       - name: Build Maven project
         run: mvn -B package --file pom.xml -DskipTests
+      - name: Output current folder content
+        run: ls
       - name: Upload artifactory
         uses: actions/upload-artifact@v4
         with:
           name: pom-file
-          path: pom.xml
+          path: ./pom.xml
       - name: Get build artifacts
         uses: actions/download-artifact@v4
         with:
