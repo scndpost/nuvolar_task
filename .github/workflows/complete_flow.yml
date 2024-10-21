@@ -18,6 +18,8 @@ jobs:
   build:
     needs: test
     runs-on: ubuntu-latest
+    outputs:
+      enum-file: ${{ steps.publish.output.enum-file-name }}
     steps:
       - name: Get code
         uses: actions/checkout@v4
@@ -28,11 +30,17 @@ jobs:
           java-version: '17'
       - name: Build Maven project
         run: mvn -B package --file pom.xml -DskipTests
+      - name: Publish Enum file name
+        id: publish
+        run: find target/classes/api/model/Pet*.class -type f -execdir echo 'enum-file-name={}' >> $GITHUB_OUTPUT ';'
       - name: Upload artifactory
         uses: actions/upload-artifact@v4
         with:
           name: pom-file
-          path: ./pom.xml
+          path: target/classes/api/model
+          # path: |
+          #   pom.xml
+          #   target/classes/api/model
   deployment:
     needs: build
     runs-on: ubuntu-latest
@@ -43,5 +51,7 @@ jobs:
           name: pom-file
       - name: Output current folder content
         run: ls
+      - name: Output stored filename variable
+        run: echo ${{ needs.build.outputs.enum-file }}
       - name: Deploy project
         run: echo "Deploying..."
