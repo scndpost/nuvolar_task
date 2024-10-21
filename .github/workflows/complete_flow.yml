@@ -37,11 +37,11 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Output current folder content
-        run: ls
       - name: Get build artifacts
         uses: actions/download-artifact@v4
         with:
           name: pom-file
+      - name: Output current folder content
+        run: ls
       - name: Deploy project
         run: echo "Deploying..."
