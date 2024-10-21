@@ -15,7 +15,7 @@ jobs:
         run: mvn dependency:resolve
       - name: Run tests
         run: mvn test
-  deployment:
+  build:
     needs: test
     runs-on: ubuntu-latest
     steps:
@@ -28,17 +28,20 @@ jobs:
           java-version: '17'
       - name: Build Maven project
         run: mvn -B package --file pom.xml -DskipTests
-      - name: Output current folder content
-        run: ls
       - name: Upload artifactory
         uses: actions/upload-artifact@v4
         with:
           name: pom-file
           path: ./pom.xml
+  deployment:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Output current folder content
+        run: ls
       - name: Get build artifacts
         uses: actions/download-artifact@v4
         with:
           name: pom.xml
       - name: Deploy project
         run: echo "Deploying..."
-
