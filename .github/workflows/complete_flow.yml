@@ -11,6 +11,11 @@ jobs:
         with:
           distribution: 'oracle'
           java-version: '17'
+      - name: Cache Maven dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: dependencies-module-maven-${{ hashFiles('**/pom.xml') }}
       - name: Install dependencies
         run: mvn dependency:resolve
       - name: Run tests
@@ -28,6 +33,11 @@ jobs:
         with:
           distribution: 'oracle'
           java-version: '17'
+      - name: Cache Maven dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: dependencies-module-maven-${{ hashFiles('**/pom.xml') }}
       - name: Build Maven project
         run: mvn -B package --file pom.xml -DskipTests
       - name: Publish Enum file name
