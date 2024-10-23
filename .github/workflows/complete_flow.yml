@@ -1,7 +1,11 @@
 name: Run tests
 on: [push, workflow_dispatch]
+env:
+  GLOBAL_JAVA: 17
 jobs:
   test:
+    env:
+      VALUE_TYPE: test_job_parameter
     runs-on: ubuntu-latest
     steps:
       - name: Get code
@@ -20,6 +24,10 @@ jobs:
         run: mvn dependency:resolve
       - name: Run tests
         run: mvn test
+      - name: Print env variable
+        run: |
+          echo $GLOBAL_JAVA
+          echo ${{ env.VALUE_TYPE }}
   build:
     needs: test
     runs-on: ubuntu-latest
