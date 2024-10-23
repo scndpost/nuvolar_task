@@ -2,6 +2,7 @@ name: Run tests
 on: [push, workflow_dispatch]
 env:
   GLOBAL_JAVA: 17
+  SECRETS_VALUE: ${{ secrets.SECRET }}
 jobs:
   test:
     env:
@@ -28,6 +29,7 @@ jobs:
         run: |
           echo $GLOBAL_JAVA
           echo ${{ env.VALUE_TYPE }}
+          echo ${{ env.SECRETS_VALUE }}
   build:
     needs: test
     runs-on: ubuntu-latest
