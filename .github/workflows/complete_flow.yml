@@ -1,5 +1,10 @@
 name: Run tests
-on: [push, workflow_dispatch]
+# on: [push, workflow_dispatch]
+on:
+  workflow_dispatch:
+  push:
+    branches-ignore:
+      - if_condition
 env:
   GLOBAL_JAVA: 17
   SECRETS_VALUE: ${{ secrets.SECRET }}
