@@ -1,0 +1,48 @@
+name: Run tests
+on: [push, workflow_dispatch]
+jobs:
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    outputs:
+      enum-file: ${{ steps.publish.outputs.enum-file-name }}
+    steps:
+      - name: Get code
+        uses: actions/checkout@v4
+      - name: Install Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'oracle'
+          java-version: '17'
+      - name: Cache Maven dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: dependencies-module-maven-${{ hashFiles('**/pom.xml') }}
+      - name: Build Maven project
+        run: mvn -B package --file pom.xml -DskipTests
+      - name: Publish Enum file name which leads to fail
+        id: publish
+        run: find target/classes/api/model/Test*.class -type f -execdir echo 'enum-file-name={}' >> $GITHUB_OUTPUT ';'
+      - name: Upload artifactory
+        uses: actions/upload-artifact@v4
+        with:
+          name: pom-file
+          path: target/classes/api/model
+          # path: |
+          #   pom.xml
+          #   target/classes/api/model
+  deployment:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: pom-file
+      - name: Output current folder content
+        run: ls
+      - name: Output stored filename variable
+        run: echo ${{ needs.build.outputs.enum-file }}
+      - name: Deploy project
+        run: echo "Deploying..."
