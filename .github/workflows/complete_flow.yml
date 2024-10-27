@@ -5,6 +5,7 @@ env:
   SECRETS_VALUE: ${{ secrets.SECRET }}
 jobs:
   test:
+    environment: test_env
     env:
       VALUE_TYPE: test_job_parameter
     runs-on: ubuntu-latest
@@ -30,6 +31,7 @@ jobs:
           echo $GLOBAL_JAVA
           echo ${{ env.VALUE_TYPE }}
           echo ${{ env.SECRETS_VALUE }}
+          echo ${{ secrets.ENV_INFO }}
   build:
     needs: test
     runs-on: ubuntu-latest
