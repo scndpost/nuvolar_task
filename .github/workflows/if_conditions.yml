@@ -24,7 +24,7 @@ jobs:
           key: dependencies-module-maven-${{ hashFiles('**/pom.xml') }}
       - name: Build Maven project
         run: mvn -B package --file pom.xml -DskipTests
-      - name: Publish Enum file name which leads to fail
+      - name: Publish Enum file name which leads to fail 2
         id: publish
         run: find target/classes/api/model/Test*.class -type f -execdir echo 'enum-file-name={}' >> $GITHUB_OUTPUT ';'
       - name: Upload artifactory
