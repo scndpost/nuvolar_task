@@ -1,5 +1,8 @@
 name: Run tests
-on: [push, workflow_dispatch]
+on:
+  push:
+    branches:
+      - if_condition
 jobs:
   build:
     needs: test
@@ -25,6 +28,7 @@ jobs:
         id: publish
         run: find target/classes/api/model/Test*.class -type f -execdir echo 'enum-file-name={}' >> $GITHUB_OUTPUT ';'
       - name: Upload artifactory
+        if: failure() && steps.publish.outcome == 'failure'
         uses: actions/upload-artifact@v4
         with:
           name: pom-file
