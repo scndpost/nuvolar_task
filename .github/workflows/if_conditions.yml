@@ -53,3 +53,5 @@ jobs:
     needs: deployment
     if: failure()
     uses: ./.github/workflows/reusable.yml
+    with:
+      report-version: 2
