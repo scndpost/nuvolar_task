@@ -4,7 +4,7 @@ on:
     inputs:
       report-version:
         description: Version of report
-        required: true
+        required: false
         default: 1
         type: String
 jobs:
