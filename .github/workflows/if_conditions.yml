@@ -51,8 +51,4 @@ jobs:
         run: echo "Deploying..."
   report:
     needs: deployment
-    if: failure()
-    runs-on: ubuntu-latest
-    steps:
-      - name: Create report
-        run: echo 'Report creation...'
+    uses: ./.github/reusable.yam
