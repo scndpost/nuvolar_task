@@ -2,8 +2,6 @@ name: Reusable report generator
 on: workflow_call
 jobs:
   report:
-    needs: deployment
-    if: failure()
     runs-on: ubuntu-latest
     steps:
       - name: Create report

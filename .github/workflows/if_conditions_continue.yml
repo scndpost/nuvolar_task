@@ -1,4 +1,4 @@
-name: If condition
+name: If condition continue
 on:
   push:
     branches:

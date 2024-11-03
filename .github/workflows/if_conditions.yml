@@ -51,4 +51,4 @@ jobs:
         run: echo "Deploying..."
   report:
     needs: deployment
-    uses: ./.github/reusable.yam
+    uses: ./.github/workflows/reusable.yml
