@@ -1,8 +1,15 @@
 name: Reusable report generator
-on: workflow_call
+on:
+  workflow_call:
+    inputs:
+      report-version:
+        description: Version of report
+        required: true
+        default: 1
+        type: String
 jobs:
   report:
     runs-on: ubuntu-latest
     steps:
       - name: Create report
-        run: echo 'Report creation...'
+        run: echo 'Report creation... ${{ inputs.report-version}}'
