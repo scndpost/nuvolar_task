@@ -5,7 +5,7 @@ on:
       report-version:
         description: Version of report
         required: false
-        default: 1
+        default: '1'
         type: String
 jobs:
   report:

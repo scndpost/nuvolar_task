@@ -54,4 +54,4 @@ jobs:
     if: failure()
     uses: ./.github/workflows/reusable.yml
     with:
-      report-version: 2
+      report-version: '2'
