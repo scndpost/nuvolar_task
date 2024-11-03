@@ -5,8 +5,8 @@ on:
       report-version:
         description: Version of report
         required: false
-        default: '1'
-        type: String
+        default: 1
+        type: string
 jobs:
   report:
     runs-on: ubuntu-latest
